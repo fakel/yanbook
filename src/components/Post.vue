@@ -89,7 +89,7 @@ export default {
           this.confirmation = false;
           this.$emit('deleted');
         })
-        .catch(err => console.log(err));
+        .catch();// err => console.log(err));
     },
     updatePost(postId) {
       axios
@@ -98,7 +98,7 @@ export default {
           this.onEdit = false;
           this.postContent.slug = this.newText;
         })
-        .catch(err => console.log(err));
+        .catch();// err => console.log(err));
     },
   },
 };

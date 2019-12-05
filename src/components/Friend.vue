@@ -52,9 +52,9 @@ export default {
     addFriend() {
       axios
         .post('/api/addFriend', { email: this.toFollow })
-        .then((res) => {
+        .then(() => {
           this.dialog = false;
-          console.log(res);
+          // console.log(res);
         })
         .catch((err) => {
           this.errorAlert = true;

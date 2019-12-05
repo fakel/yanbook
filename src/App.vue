@@ -33,7 +33,7 @@
           </v-list>
         </v-menu>
       </div>
-      <friend/>
+      <friend v-if="logedIn"/>
     </v-app-bar>
 
     <v-content>

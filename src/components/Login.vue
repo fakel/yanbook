@@ -36,6 +36,13 @@
           </v-card-actions>
         </v-card>
       </v-card>
+    <div>
+      <v-alert prominent type="error" :value="errorAlert">
+        <v-row align="center">
+          <v-col class="grow" @click="errorAlert = false">Error: {{ errorMsg }}</v-col>
+        </v-row>
+      </v-alert>
+    </div>
     </v-dialog>
   </div>
 </template>
@@ -45,6 +52,8 @@ import axios from 'axios';
 
 export default {
   data: () => ({
+    errorAlert: false,
+    errorMsg: '',
     dialog: false,
     show: false,
     email: '',
@@ -76,7 +85,10 @@ export default {
             this.$router.push({ name: 'Wall' });
           }
         })
-        .catch(err => console.log(err));
+        .catch((err) => {
+          this.errorAlert = true;
+          this.errorMsg = err;
+        }); // err => console.log(err));
     },
   },
 };

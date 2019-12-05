@@ -37,12 +37,12 @@ export default {
     send() {
       axios
         .post('/api/posts', { post: this.toPost, public: this.publicView })
-        .then((res) => {
+        .then(() => {
           this.toPost = '';
           this.$emit('sent');
-          console.log(res);
+          // console.log(res);
         })
-        .catch(err => console.log(err));
+        .catch();// err => console.log(err));
     },
   },
 };
