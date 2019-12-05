@@ -33,6 +33,7 @@
           </v-list>
         </v-menu>
       </div>
+      <friend/>
     </v-app-bar>
 
     <v-content>
@@ -44,11 +45,12 @@
 <script>
 import Login from './components/Login.vue';
 import Signup from './components/Signup.vue';
+import Friend from './components/Friend.vue';
 
 export default {
   name: 'App',
 
-  components: { Login, Signup },
+  components: { Login, Signup, Friend },
 
   data: () => ({
     options: {

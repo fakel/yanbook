@@ -38,9 +38,9 @@ export default {
         .get('/api/posts', { params: { own: 2 } })
         .then((res) => {
           this.posts = res.data;
-          console.log(this.posts);
+          // console.log(this.posts);
         })
-        .catch(err => console.log(err));
+        .catch();// err => console.log(err));
     },
   },
   components: {

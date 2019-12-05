@@ -9,7 +9,7 @@ import '@mdi/font/css/materialdesignicons.css';
 
 Vue.config.productionTip = false;
 
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = 'https://bookforyanbook.herokuapp.com';
 
 new Vue({
   router,
