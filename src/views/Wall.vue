@@ -35,7 +35,7 @@ export default {
   methods: {
     updatePosts() {
       axios
-        .get('/api/posts', { params: { own: 2 } })
+        .get('/api/posts', { params: { own: 3 } })
         .then((res) => {
           this.posts = res.data;
           // console.log(this.posts);
