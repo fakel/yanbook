@@ -3,14 +3,19 @@
   <div>
     <v-dialog v-model="dialog" max-width="290">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark v-on="on">Login</v-btn>
+        <v-btn color="primary" dark v-on="on">SignUp</v-btn>
       </template>
       <v-card>
         <v-card class="mx-auto" max-width="344" outlined>
           <v-list-item three-line>
             <v-list-item-content>
-              <div class="overline mb-4">Login</div>
+              <div class="overline mb-4">SignUp</div>
               <v-form v-model="isFormValid">
+                <v-text-field
+                  v-model="name"
+                  :rules="[rules.required, rules.min]"
+                  label="A great Name"
+                />
                 <v-text-field
                   v-model="email"
                   :rules="[rules.required, rules.email]"
@@ -32,7 +37,7 @@
           </v-list-item>
 
           <v-card-actions>
-            <v-btn @click="login" :disabled="!isFormValid" text>Login</v-btn>
+            <v-btn @click="sigup" :disabled="!isFormValid" text>SignUp</v-btn>
           </v-card-actions>
         </v-card>
       </v-card>
@@ -49,6 +54,7 @@ export default {
     show: false,
     email: '',
     password: '',
+    name: '',
     isFormValid: false,
     rules: {
       required: value => !!value || 'Required.',
@@ -62,9 +68,9 @@ export default {
     },
   }),
   methods: {
-    login() {
+    sigup() {
       axios
-        .post('/api/login', { email: this.email, password: this.password })
+        .post('/api/signup', { name: this.name, email: this.email, password: this.password })
         .then((res) => {
           if (res.data.token) {
             axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;

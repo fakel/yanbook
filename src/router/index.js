@@ -17,7 +17,7 @@ const routes = [
     component: () => import('../views/Wall.vue'),
     beforeEnter(to, from, next) {
       store.dispatch('checkCredentials');
-      if (store.getters.checkUser) {
+      if (store.getters.checkToken) {
         next();
       } else {
         next({ name: 'Home' });
