@@ -37,7 +37,7 @@
         icon
         class="mr-5"
         v-if="postContent.creator == $store.getters.checkId && onEdit == false"
-        @click="deletePost(postContent._id)"
+        @click="confirmation = true"
       >
         <v-icon>mdi-delete</v-icon>
       </v-btn>
@@ -45,6 +45,19 @@
         <v-icon>mdi-send</v-icon>
       </v-btn>
     </v-row>
+    <div>
+      <v-alert prominent type="error" :value="confirmation" >
+        <v-row align="center">
+          <v-col class="grow">Are you sure?</v-col>
+          <v-col class="shrink">
+            <v-btn @click="deletePost(postContent._id)">DELETE</v-btn>
+          </v-col>
+          <v-col class="shrink">
+            <v-btn @click="confirmation = false">CANCEL</v-btn>
+            </v-col>
+        </v-row>
+      </v-alert>
+    </div>
   </v-card>
 </template>
 
@@ -56,6 +69,7 @@ export default {
     return {
       newText: '',
       onEdit: false,
+      confirmation: false,
       rules: {
         required: value => !!value || 'Required.',
         min: v => v.length >= 15 || 'Min 15 characters',
@@ -68,14 +82,11 @@ export default {
       this.newText = this.postContent.slug;
       this.onEdit = true;
     },
-    confirm() {
-      
-    }
     deletePost(postId) {
       axios
         .delete('/api/posts', { params: { id: postId } })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          this.confirmation = false;
           this.$emit('deleted');
         })
         .catch(err => console.log(err));
@@ -83,10 +94,9 @@ export default {
     updatePost(postId) {
       axios
         .patch('/api/posts', { id: postId, slug: this.newText })
-        .then((res) => {
+        .then(() => {
           this.onEdit = false;
           this.postContent.slug = this.newText;
-          console.log(res);
         })
         .catch(err => console.log(err));
     },
